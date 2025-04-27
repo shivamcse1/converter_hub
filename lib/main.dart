@@ -1,5 +1,5 @@
 import 'package:converter_hub/presentation/views/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:converter_hub/presentation/views/dashboard/dashboard_view.dart';
+import 'package:converter_hub/presentation/views/dashboard/category_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

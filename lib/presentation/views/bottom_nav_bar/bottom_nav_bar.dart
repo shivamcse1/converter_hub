@@ -1,5 +1,10 @@
+// ignore_for_file: deprecated_member_use, avoid_print
+
+import 'package:converter_hub/core/theme/app_colors.dart';
+import 'package:converter_hub/presentation/views/dashboard/category_view.dart';
+import 'package:converter_hub/presentation/views/home/home_view.dart';
+import 'package:converter_hub/presentation/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -9,19 +14,45 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  List<Widget> bodyWidget = [];
+  List<Widget> bodyWidget = [HomeView(), CategoryView(), ProfileView()];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: bodyWidget[0],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Dashboard"),
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle),label: "Profile"),
-        ],
+    return DefaultTabController(
+      animationDuration: Duration(milliseconds: 800),
+      length: 3,
+      child: Scaffold(
+        bottomNavigationBar: bottomNavBar(),
+        body: TabBarView(children: bodyWidget),
       ),
     );
   }
+}
+
+Widget bottomNavBar() {
+  return Container(
+    height: 65,
+    decoration: BoxDecoration(
+      color: AppColors.blueColor,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      ),
+    ),
+    child: TabBar(
+      indicatorColor: AppColors.lightPinkColor,
+      padding: EdgeInsets.zero,
+      onTap: (index) {
+        print("current index $index");
+      },
+      indicatorPadding: EdgeInsets.only(bottom: 60, left: 45, right: 45),
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: AppColors.whiteColor,
+      tabs: [
+        Tab(text: "Home", icon: Icon(Icons.home)),
+        Tab(text: "Category", icon: Icon(Icons.category)),
+        Tab(text: "Profile", icon: Icon(Icons.person)),
+      ],
+    ),
+  );
 }
