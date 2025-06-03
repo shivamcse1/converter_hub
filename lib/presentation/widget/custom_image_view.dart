@@ -28,10 +28,10 @@ class CustomImageView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         isBackBtnVisible: true,
-        backIconColor: Colors.white,
+        backIconColor: AppColors.whiteColor,
         titleStyle: TextStyle(color: AppColors.whiteColor),
         title: title,
-        appBarColor: Colors.deepPurple[300],
+        appBarColor: AppColors.primaryColor,
       ),
       body: InteractiveViewer(
         minScale: 1.0,
@@ -49,7 +49,7 @@ class CustomImageView extends StatelessWidget {
                       // Placeholder while the image is loading
                       placeholder: (context, imgUrl) {
                         return Container(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           child: const Center(
                             child: CupertinoActivityIndicator(),
                           ),
@@ -81,7 +81,7 @@ class CustomImageView extends StatelessWidget {
                               fit: imageFit,
                               placeholderBuilder: (context) {
                                 return Container(
-                                  color: Colors.white,
+                                  color: AppColors.whiteColor,
                                   child: const Center(
                                     child: CupertinoActivityIndicator(),
                                   ),

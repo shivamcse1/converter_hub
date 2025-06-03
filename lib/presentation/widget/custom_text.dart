@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class CustomText extends StatelessWidget {
-  const CustomText(
-     {
+  const CustomText({
     super.key,
     required this.text,
     this.style,

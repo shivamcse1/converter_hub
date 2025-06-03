@@ -1,3 +1,4 @@
+import 'package:converter_hub/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -52,8 +53,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             : leading ?? const SizedBox(),
         centerTitle: isTitleCentered,
         title: titleWidget ??
-            Text(
-              title,
+            CustomText(
+             text: title,
               style: titleStyle,
             ),
         backgroundColor: appBarColor,

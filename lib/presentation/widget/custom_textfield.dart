@@ -1,5 +1,7 @@
+import 'package:converter_hub/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool? focus;
@@ -64,11 +66,10 @@ class CustomTextField extends StatelessWidget {
     return Container(
       margin: margin,
       padding: padding,
-      height: height,
-      width: width,
+      height: height?.h,
+      width: width?.w,
       decoration: BoxDecoration(
-        color: Colors.amber,
-        borderRadius: BorderRadius.circular(radius!),
+        borderRadius: BorderRadius.circular(radius!.r),
       ),
       child: TextFormField(
         validator: validator,
@@ -85,35 +86,35 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         controller: controller,
         decoration: InputDecoration(
-          hintStyle: hintStyle ?? const TextStyle(color: Colors.grey),
+          hintStyle: hintStyle ?? TextStyle(color: AppColors.greyColor),
           hintText: hintText,
           errorStyle: const TextStyle(height: .1),
           contentPadding: EdgeInsets.symmetric(
-              vertical: (height! - 20) / 2 - 2, horizontal: 10),
+              vertical: (height! - 20) / 2 - 2, horizontal: 10.w),
           filled: true,
-          fillColor: backGroundColor ?? Colors.white,
+          fillColor: backGroundColor ?? AppColors.whiteColor,
           suffixIcon: suffix,
           prefixIcon: prefix,
           labelText: labelText,
           labelStyle: labelStyle,
           isDense: false,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10.0.r),
+            borderSide: const BorderSide(color: AppColors.greyColor),
           ),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: enableBorderColor ?? Colors.grey),
-              borderRadius: BorderRadius.circular(radius!)),
+              borderSide: BorderSide(color: enableBorderColor ?? AppColors.greyColor),
+              borderRadius: BorderRadius.circular(radius!.r)),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius!),
-              borderSide: BorderSide(color: focusBorderColor ?? Colors.grey)),
+              borderRadius: BorderRadius.circular(radius!.r),
+              borderSide: BorderSide(color: focusBorderColor ?? AppColors.greyColor)),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(radius!),
-            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(radius!.r),
+            borderSide: const BorderSide(color: AppColors.errorColor),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(radius!),
-            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(radius!.r),
+            borderSide: const BorderSide(color: AppColors.errorColor),
           ),
         ),
       ),

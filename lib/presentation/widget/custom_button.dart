@@ -1,4 +1,10 @@
+import 'package:converter_hub/core/decoration/app_decoration.dart';
+import 'package:converter_hub/core/theme/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../core/theme/app_colors.dart';
+import 'custom_text.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String buttonText;
@@ -35,35 +41,35 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      height: height!,
-      width: width!,
+      height: height!.h,
+      width: width!.w,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: isTextFieldEmpty == true
-                  ? buttonColor ?? Colors.red
-                  : Colors.red,
+                  ? buttonColor ?? AppColors.errorColor
+                  : AppColors.errorColor,
               shape: RoundedRectangleBorder(
                   side: BorderSide(
                       width: borderWidth ?? 1,
-                      color: borderColor ?? Colors.red),
-                  borderRadius: BorderRadius.circular(radius ?? 10))),
+                      color: borderColor ?? AppColors.errorColor),
+                  borderRadius: BorderRadius.circular(radius?.r ?? AppDecoration.radius10))),
           onPressed: onTap,
           child: (isLoading == true)
               ? Visibility(
                   visible: isLoading,
                   child: Container(
-                    width: height! / 1.5,
-                    height: height! / 1.18,
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    width: height!.h / 1.5,
+                    height: height!.h / 1.18,
+                    padding:  EdgeInsets.symmetric(vertical: 5.h),
                     child: CircularProgressIndicator(
                       color: loderColor,
                       // backgroundColor: Colors.whi,
                     ),
                   ))
-              : Text(buttonText,
+              : CustomText( text:buttonText,
                   style: isTextFieldEmpty == true
-                      ? buttonTextStyle ?? const TextStyle(fontSize: 16)
-                      : const TextStyle(fontSize: 16))),
+                      ? buttonTextStyle ?? AppTextStyles.nunito16W500H1_4
+                      : AppTextStyles.nunito16W500H1_4)),
     );
   }
 }
@@ -102,16 +108,16 @@ class CustomQuantityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: margin,
-        height: height!,
-        width: width!,
+        height: height!.h,
+        width: width!.w,
         padding: padding ??
-            const EdgeInsets.symmetric(
-              horizontal: 8,
+            EdgeInsets.symmetric(
+              horizontal: 8.w,
             ),
         decoration: BoxDecoration(
             color: buttonColor,
-            border: Border.all(color: Colors.green),
-            borderRadius: BorderRadius.circular(radius ?? 10)),
+            border: Border.all(color: AppColors.secondaryColor),
+            borderRadius: BorderRadius.circular(radius?.r ?? AppDecoration.radius10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -119,19 +125,19 @@ class CustomQuantityButton extends StatelessWidget {
                 onTap: onMinusTap,
                 child: Icon(
                   Icons.remove,
-                  color: iconColor ?? Colors.green,
-                  size: iconSize,
+                  color: iconColor ?? AppColors.primaryColor,
+                  size: iconSize?.r,
                 )),
-            Text(
-              quantity!,
-              style: quantityStyle ?? const TextStyle(fontSize: 16),
+            CustomText(
+             text:  quantity!,
+              style: quantityStyle ?? AppTextStyles.nunito16W500H1_4
             ),
             InkWell(
                 onTap: onPlusTap,
                 child: Icon(
                   Icons.add,
-                  color: iconColor ?? Colors.red,
-                  size: iconSize,
+                  color: iconColor ?? AppColors.primaryColor,
+                  size: iconSize?.r,
                 ))
           ],
         ));
@@ -166,7 +172,7 @@ class CustomTextButton extends StatelessWidget {
     this.width,
     this.radius,
     this.buttonColor = Colors.transparent,
-    this.loderColor = Colors.white,
+    this.loderColor = AppColors.whiteColor,
     this.buttonTextStyle,
     this.margin,
     this.isLoading = false,
@@ -184,8 +190,8 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: margin,
-        height: height,
-        width: width,
+        height: height?.h,
+        width: width?.w,
         child: TextButton(
           style: TextButton.styleFrom(
               foregroundColor: foregroundColor,
@@ -201,15 +207,15 @@ class CustomTextButton extends StatelessWidget {
               ? Visibility(
                   visible: isLoading,
                   child: Container(
-                    width: height! / 1.5,
-                    height: height! / 1.18,
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    width: height!.h / 1.5,
+                    height: height!.h / 1.18,
+                    padding:  EdgeInsets.symmetric(vertical: 5.h),
                     child: CircularProgressIndicator(
                       color: loderColor,
                       // backgroundColor: Colors.whi,
                     ),
                   ))
-              : Text(buttonText, style: buttonTextStyle),
+              : CustomText(text:buttonText, style: buttonTextStyle),
         ));
   }
 }

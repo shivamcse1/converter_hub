@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:converter_hub/core/constant/image_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../core/theme/app_colors.dart';
 
 class CustomImage extends StatelessWidget {
   final String image;
@@ -33,14 +36,14 @@ class CustomImage extends StatelessWidget {
         ? shape == BoxShape.circle
             ? ClipOval(
               child: CachedNetworkImage(
-                height: height,
-                width: height,
+                height: height.h,
+                width: height.h,
                 imageUrl: image,
                 fit: imageFit,
                 // Placeholder while the image is loading
                 placeholder: (context, imgUrl) {
                   return Container(
-                    color: Colors.white,
+                    color: AppColors.whiteColor,
                     child: const Center(child: CupertinoActivityIndicator()),
                   );
                 },
@@ -50,7 +53,7 @@ class CustomImage extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius:
                           shape != BoxShape.circle ? borderRadius : null,
-                      color: backgroundColor ?? Colors.grey.shade300,
+                      color: backgroundColor ?? AppColors.backgroundColor,
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: AssetImage(
@@ -65,14 +68,14 @@ class CustomImage extends StatelessWidget {
             : ClipRRect(
               borderRadius: borderRadius,
               child: CachedNetworkImage(
-                height: height,
-                width: width,
+                height: height.h,
+                width: width.w,
                 imageUrl: image,
                 fit: imageFit,
                 // Placeholder while the image is loading
                 placeholder: (context, imgUrl) {
                   return Container(
-                    color: Colors.white,
+                    color: AppColors.whiteColor,
                     child: const Center(child: CupertinoActivityIndicator()),
                   );
                 },
@@ -89,14 +92,15 @@ class CustomImage extends StatelessWidget {
             image.endsWith(".jpeg") ||
             image.endsWith(".gif"))
         ? Container(
-          height: height,
-          width: shape == BoxShape.circle ? height : width,
+          height: height.h,
+          width: shape == BoxShape.circle ? height.h : width.w,
           decoration: BoxDecoration(
-            color:
-                backgroundColor ??
-                (shape == BoxShape.circle
-                    ? Colors.grey.shade300
-                    : Colors.transparent),
+            color: backgroundColor ??
+                (
+                   shape == BoxShape.circle
+                    ? AppColors.backgroundColor
+                    : AppColors.transparentColor 
+                ),
             borderRadius: shape != BoxShape.circle ? borderRadius : null,
             shape: shape,
             image: DecorationImage(fit: imageFit, image: AssetImage(image)),
@@ -104,8 +108,8 @@ class CustomImage extends StatelessWidget {
         )
         : image.endsWith(".svg")
         ? Container(
-          height: height,
-          width: shape == BoxShape.circle ? height : width,
+          height: height.h,
+          width: shape == BoxShape.circle ? height.h : width.w,
           decoration: BoxDecoration(
             shape: shape,
             borderRadius: shape != BoxShape.circle ? borderRadius : null,
@@ -127,16 +131,16 @@ class CustomImage extends StatelessWidget {
           ),
         )
         : Container(
-          height: height,
-          width: shape == BoxShape.circle ? height : width,
+          height: height.h,
+          width: shape == BoxShape.circle ? height.h : width.w,
           decoration: BoxDecoration(
             borderRadius: shape != BoxShape.circle ? borderRadius : null,
             shape: shape,
             color:
                 backgroundColor ??
                 (shape == BoxShape.circle
-                    ? Colors.grey.shade300
-                    : Colors.transparent),
+                    ? AppColors.backgroundColor
+                    : AppColors.transparentColor),
             image: DecorationImage(
               fit: imageFit,
               image: AssetImage(ImageConstant.imageErrorIc),
