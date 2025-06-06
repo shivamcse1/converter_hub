@@ -7,6 +7,7 @@ class ImageConstant {
   static String galleryIc = "assets/icons/gallery_ic.png";
   static String warningIc = "assets/icons/warning_ic.png";
   static String imageErrorIc = "assets/icons/image_error_ic.png";
+  static String cloudUploadIc = "assets/icons/cloud_upload_ic.png";
 
   ///------------------Lottie Json----------------------///
 

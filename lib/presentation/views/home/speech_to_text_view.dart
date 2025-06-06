@@ -4,7 +4,7 @@ import 'package:converter_hub/core/constant/image_constant.dart';
 import 'package:converter_hub/core/theme/app_colors.dart';
 import 'package:converter_hub/core/theme/app_styles.dart';
 import 'package:converter_hub/core/utils/permission_handler/permission_handler.dart';
-import 'package:converter_hub/presentation/views/speech_to_text/widget/speech_recognition_dialog_box.dart';
+import 'package:converter_hub/presentation/views/home/widget/speech_recognition_dialog_box.dart';
 import 'package:converter_hub/presentation/widget/custom_app_bar.dart';
 import 'package:converter_hub/presentation/widget/custom_image.dart';
 import 'package:converter_hub/state_management/provider/speech_to_text_provider.dart';
@@ -36,13 +36,8 @@ class _SpeechToTextViewState extends State<SpeechToTextView> {
     return Scaffold(
       appBar: CustomAppBar(
         isBackBtnVisible: true,
-        backIconColor: AppColors.whiteColor,
         title: AppString.speechToText,
-        titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
-          color: AppColors.whiteColor,
-        ),
         isTitleCentered: true,
-        appBarColor: AppColors.primaryColor,
       ),
 
       body: Container(

@@ -95,12 +95,11 @@ class CustomImage extends StatelessWidget {
           height: height.h,
           width: shape == BoxShape.circle ? height.h : width.w,
           decoration: BoxDecoration(
-            color: backgroundColor ??
-                (
-                   shape == BoxShape.circle
+            color:
+                backgroundColor ??
+                (shape == BoxShape.circle
                     ? AppColors.backgroundColor
-                    : AppColors.transparentColor 
-                ),
+                    : AppColors.transparentColor),
             borderRadius: shape != BoxShape.circle ? borderRadius : null,
             shape: shape,
             image: DecorationImage(fit: imageFit, image: AssetImage(image)),

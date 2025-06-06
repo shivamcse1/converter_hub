@@ -40,6 +40,8 @@ dependencies:
   flutter_svg: ^2.1.0
   typewritertext: ^3.0.9
   fluttertoast: ^8.2.12
+  google_mlkit_text_recognition: ^0.15.0
+  share_plus: ^11.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:converter_hub/core/routes/app_routes.dart';
-import 'package:converter_hub/presentation/views/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:converter_hub/core/theme/app_colors.dart';
+import 'package:converter_hub/state_management/provider/image_to_text_provider.dart';
 import 'package:converter_hub/state_management/provider/speech_to_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,15 +20,16 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return MultiProvider(
           providers: [
-              ChangeNotifierProvider(create: (context)=> SpeechToTextProvider())
+              ChangeNotifierProvider(create: (context)=> SpeechToTextProvider()),
+              ChangeNotifierProvider(create: (context)=> ImageToTextProvider()),
           ],
           builder: (context,child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               initialRoute: AppRoutes.bottomNavBar,
-              routes: {'/': (context) => BottomNavBar()},
+              routes: AppRoutes.routes,
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
               ),
             );
           }

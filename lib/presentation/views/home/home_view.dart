@@ -3,10 +3,12 @@ import 'package:converter_hub/core/theme/app_colors.dart';
 import 'package:converter_hub/core/theme/app_styles.dart';
 import 'package:converter_hub/presentation/views/home/widget/custom_home_item.dart';
 import 'package:converter_hub/presentation/views/home/widget/custom_heading.dart';
-import 'package:converter_hub/presentation/views/speech_to_text/speech_to_text_view.dart';
+import 'package:converter_hub/presentation/views/home/speech_to_text_view.dart';
 import 'package:converter_hub/presentation/widget/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/routes/app_routes.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -46,11 +48,9 @@ class HomeViewState extends State<HomeView> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => SpeechToTextView(),
-                          ),
+                          AppRoutes.speechToTextView,
                         );
                       },
                       child: CustomHomeItem(
@@ -66,12 +66,17 @@ class HomeViewState extends State<HomeView> {
                   SizedBox(width: 10.w),
 
                   Expanded(
-                    child: CustomHomeItem(
-                      width: 125,
-                      radius: 15,
-                      image: ImageConstant.imageToTextImg,
-                      text: "Image \nTo Text",
-                      textStyle: AppTextStyles.nunito15W600H1_4,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.imageToTextView);
+                      },
+                      child: CustomHomeItem(
+                        width: 125,
+                        radius: 15,
+                        image: ImageConstant.imageToTextImg,
+                        text: "Image \nTo Text",
+                        textStyle: AppTextStyles.nunito15W600H1_4,
+                      ),
                     ),
                   ),
                   SizedBox(width: 10.w),

@@ -64,4 +64,5 @@ class SpeechToTextProvider extends ChangeNotifier {
      recognizedText = '';
      notifyListeners();
   }
+  
 }
