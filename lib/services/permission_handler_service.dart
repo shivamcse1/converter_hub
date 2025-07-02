@@ -1,9 +1,10 @@
-import 'package:converter_hub/core/utils/ui_helper/ui_helper.dart';
+import 'package:converter_hub/core/helper/ui_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class PermissionHandler {
-  
-  /// It used for mic permission
+class PermissionHandlerService {
+
+
+ /// It used for mic permission
   static Future<bool> micPermissionHandler() async {
     final PermissionStatus micStatus = await Permission.microphone.status;
     if(micStatus.isGranted == true) return true;
@@ -41,4 +42,6 @@ class PermissionHandler {
         return false;
     }
   }
+
+  
 }

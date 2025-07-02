@@ -2,7 +2,7 @@
 
 import 'package:converter_hub/core/constant/app_string.dart';
 import 'package:converter_hub/core/decoration/app_decoration.dart';
-import 'package:converter_hub/core/utils/ui_helper/ui_helper.dart';
+import 'package:converter_hub/core/helper/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -50,7 +50,7 @@ class CustomLoader {
               child:
                   loaderWidget ??
                   (loaderImage != null
-                      ? checkImageType(image: loaderImage)
+                      ? _checkImageType(image: loaderImage)
                       : CircularProgressIndicator(color: indigatorColor)),
             ),
           ),
@@ -76,7 +76,7 @@ class CustomLoader {
     }
   }
 
-  static Widget checkImageType({required String image}) {
+  static Widget _checkImageType({required String image}) {
     if (image.endsWith('.json')) {
       return Lottie.asset(image);
     } else {

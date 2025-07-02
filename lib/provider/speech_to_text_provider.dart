@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:converter_hub/core/constant/app_string.dart';
-import 'package:converter_hub/core/utils/ui_helper/ui_helper.dart';
+import 'package:converter_hub/core/helper/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;

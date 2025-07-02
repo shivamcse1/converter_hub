@@ -1,6 +1,7 @@
 class ImageConstant {
+  
   //!------------- Icon String--------------------///
-
+  
   static String previewIc = "assets/icons/preview_ic.png";
   static String preview2Ic = "assets/icons/preview2_ic.png";
   static String cameraIc = "assets/icons/camera_ic.png";
@@ -54,4 +55,5 @@ class ImageConstant {
       "assets/images/voice_recognition3_img.png";
   static String voiceImg = "assets/images/voice_img.png";
   static String voice2Img = "assets/images/voice2_img.png";
+
 }

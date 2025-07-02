@@ -15,6 +15,8 @@ class AppString {
   static const String delete = "Delete";
   static const String speechToText = "Speech To Text";
   static const String imageToText = "Image To Text";
+  static const String textToSpeech = "Text To Speech";
+  static const String imageToPdf = "Image To Pdf";
   static const String uploadOrPickImageFromDevice = "Upload or Pick Image from device";
   static const String somethingWentWrong = "Something went wrong";
   static const String permission = "Permission";

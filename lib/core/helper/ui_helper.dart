@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../theme/app_colors.dart';
+import '../theme/app_colors.dart';
+
 
 class UiHelper {
   /// for print any statement

@@ -7,8 +7,9 @@ import '../../core/theme/app_colors.dart';
 import 'custom_text.dart';
 
 class CustomElevatedButton extends StatelessWidget {
+  final Widget? preWidget;
   final String buttonText;
-  final VoidCallback onTap;
+  final void Function()? onTap;
   final double? height;
   final double? width;
   final double? borderWidth;
@@ -21,55 +22,83 @@ class CustomElevatedButton extends StatelessWidget {
   final bool isLoading;
   final EdgeInsetsGeometry? margin;
 
-  const CustomElevatedButton(
-      {super.key,
-      required this.buttonText,
-      required this.onTap,
-      this.height = 50,
-      this.width = double.infinity,
-      this.radius,
-      this.buttonColor,
-      this.loderColor = Colors.white,
-      this.buttonTextStyle,
-      this.isTextFieldEmpty = true,
-      this.margin,
-      this.isLoading = false,
-      this.borderWidth,
-      this.borderColor});
+  const CustomElevatedButton({
+    super.key,
+    required this.buttonText,
+    required this.onTap,
+    this.height = 40,
+    this.width,
+    this.radius,
+    this.buttonColor,
+    this.loderColor = Colors.white,
+    this.buttonTextStyle,
+    this.isTextFieldEmpty = true,
+    this.margin,
+    this.isLoading = false,
+    this.borderWidth,
+    this.borderColor,
+    this.preWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
       height: height!.h,
-      width: width!.w,
+      width: width?.w,
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: isTextFieldEmpty == true
+        style: ElevatedButton.styleFrom(
+          backgroundColor:
+              isTextFieldEmpty == true
                   ? buttonColor ?? AppColors.errorColor
                   : AppColors.errorColor,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      width: borderWidth ?? 1,
-                      color: borderColor ?? AppColors.errorColor),
-                  borderRadius: BorderRadius.circular(radius?.r ?? AppDecoration.radius10))),
-          onPressed: onTap,
-          child: (isLoading == true)
-              ? Visibility(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: borderWidth ?? 1,
+              color: buttonColor ?? borderColor ?? AppColors.errorColor,
+            ),
+            borderRadius: BorderRadius.circular(
+              radius?.r ?? AppDecoration.radius10,
+            ),
+          ),
+        ),
+        onPressed: onTap,
+        child:
+            (isLoading == true)
+                ? Visibility(
                   visible: isLoading,
                   child: Container(
                     width: height!.h / 1.5,
                     height: height!.h / 1.18,
-                    padding:  EdgeInsets.symmetric(vertical: 5.h),
+                    padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: CircularProgressIndicator(
                       color: loderColor,
                       // backgroundColor: Colors.whi,
                     ),
-                  ))
-              : CustomText( text:buttonText,
-                  style: isTextFieldEmpty == true
-                      ? buttonTextStyle ?? AppTextStyles.nunito16W500H1_4
-                      : AppTextStyles.nunito16W500H1_4)),
+                  ),
+                )
+                : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (preWidget != null) ...[
+                      preWidget!,
+                      SizedBox(width: 5.w),
+                    ] else ...[
+                      SizedBox(),
+                    ],
+                    Flexible(
+                      child: CustomText(
+                        text: buttonText,
+                        style:
+                            isTextFieldEmpty == true
+                                ? buttonTextStyle ??
+                                    AppTextStyles.nunito16W500H1_4
+                                : AppTextStyles.nunito16W500H1_4,
+                      ),
+                    ),
+                  ],
+                ),
+      ),
     );
   }
 }
@@ -107,40 +136,43 @@ class CustomQuantityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: margin,
-        height: height!.h,
-        width: width!.w,
-        padding: padding ??
-            EdgeInsets.symmetric(
-              horizontal: 8.w,
+      margin: margin,
+      height: height!.h,
+      width: width!.w,
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 8.w),
+      decoration: BoxDecoration(
+        color: buttonColor,
+        border: Border.all(color: AppColors.secondaryColor),
+        borderRadius: BorderRadius.circular(
+          radius?.r ?? AppDecoration.radius10,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: onMinusTap,
+            child: Icon(
+              Icons.remove,
+              color: iconColor ?? AppColors.primaryColor,
+              size: iconSize?.r,
             ),
-        decoration: BoxDecoration(
-            color: buttonColor,
-            border: Border.all(color: AppColors.secondaryColor),
-            borderRadius: BorderRadius.circular(radius?.r ?? AppDecoration.radius10)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-                onTap: onMinusTap,
-                child: Icon(
-                  Icons.remove,
-                  color: iconColor ?? AppColors.primaryColor,
-                  size: iconSize?.r,
-                )),
-            CustomText(
-             text:  quantity!,
-              style: quantityStyle ?? AppTextStyles.nunito16W500H1_4
+          ),
+          CustomText(
+            text: quantity!,
+            style: quantityStyle ?? AppTextStyles.nunito16W500H1_4,
+          ),
+          InkWell(
+            onTap: onPlusTap,
+            child: Icon(
+              Icons.add,
+              color: iconColor ?? AppColors.primaryColor,
+              size: iconSize?.r,
             ),
-            InkWell(
-                onTap: onPlusTap,
-                child: Icon(
-                  Icons.add,
-                  color: iconColor ?? AppColors.primaryColor,
-                  size: iconSize?.r,
-                ))
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -189,33 +221,37 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: margin,
-        height: height?.h,
-        width: width?.w,
-        child: TextButton(
-          style: TextButton.styleFrom(
-              foregroundColor: foregroundColor,
-              splashFactory: InkRipple.splashFactory,
-              padding: padding,
-              elevation: buttonElevation,
-              minimumSize: minimumSize,
-              backgroundColor: buttonColor,
-              tapTargetSize: tapTargetSize,
-              shape: buttonShape),
-          onPressed: onTap,
-          child: (isLoading == true)
-              ? Visibility(
+      margin: margin,
+      height: height?.h,
+      width: width?.w,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: foregroundColor,
+          splashFactory: InkRipple.splashFactory,
+          padding: padding,
+          elevation: buttonElevation,
+          minimumSize: minimumSize,
+          backgroundColor: buttonColor,
+          tapTargetSize: tapTargetSize,
+          shape: buttonShape,
+        ),
+        onPressed: onTap,
+        child:
+            (isLoading == true)
+                ? Visibility(
                   visible: isLoading,
                   child: Container(
                     width: height!.h / 1.5,
                     height: height!.h / 1.18,
-                    padding:  EdgeInsets.symmetric(vertical: 5.h),
+                    padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: CircularProgressIndicator(
                       color: loderColor,
                       // backgroundColor: Colors.whi,
                     ),
-                  ))
-              : CustomText(text:buttonText, style: buttonTextStyle),
-        ));
+                  ),
+                )
+                : CustomText(text: buttonText, style: buttonTextStyle),
+      ),
+    );
   }
 }

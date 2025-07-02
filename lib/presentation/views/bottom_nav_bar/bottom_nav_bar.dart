@@ -1,12 +1,9 @@
 // ignore_for_file: deprecated_member_use, avoid_print
-
-import 'package:converter_hub/core/constant/app_string.dart';
-import 'package:converter_hub/core/theme/app_colors.dart';
+import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/presentation/views/history/history_view.dart';
 import 'package:converter_hub/presentation/views/home/home_view.dart';
 import 'package:converter_hub/presentation/views/profile/profile_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

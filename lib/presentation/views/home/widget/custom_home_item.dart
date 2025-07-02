@@ -17,6 +17,7 @@ class CustomHomeItem extends StatelessWidget {
   final String? image;
   final String? text;
   final TextStyle? textStyle;
+  final VoidCallback?  onTap;
 
   const CustomHomeItem({
     super.key,
@@ -29,42 +30,46 @@ class CustomHomeItem extends StatelessWidget {
     this.image,
     this.text,
     this.textStyle,
-    this.textAlign,
+    this.textAlign, 
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height?.h,
-      width: width?.w,
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 0.w),
-      padding:
-          insidePadding ??
-          EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-      decoration: BoxDecoration(
-        color: backgrounndColor ?? AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(radius?.r ?? 5.0.r),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomImage(
-            image: image ?? ImageConstant.previewIc,
-            imageFit: BoxFit.contain,
-          ),
-
-          SizedBox(height: 10.h),
-          CustomText(
-            maxLines: 2,
-            text: text ?? "",
-            textAlign: textAlign ?? TextAlign.center,
-            style:
-                textStyle ??
-                AppTextStyles.nunito16W800H1_4.copyWith(
-                  color: AppColors.whiteColor,
-                ),
-          ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: height?.h,
+        width: width?.w,
+        margin: margin ?? EdgeInsets.symmetric(horizontal: 0.w),
+        padding:
+            insidePadding ??
+            EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        decoration: BoxDecoration(
+          color: backgrounndColor ?? AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(radius?.r ?? 5.0.r),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomImage(
+              image: image ?? ImageConstant.previewIc,
+              imageFit: BoxFit.contain,
+            ),
+      
+            SizedBox(height: 10.h),
+            CustomText(
+              maxLines: 2,
+              text: text ?? "",
+              textAlign: textAlign ?? TextAlign.center,
+              style:
+                  textStyle ??
+                  AppTextStyles.nunito16W800H1_4.copyWith(
+                    color: AppColors.whiteColor,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }

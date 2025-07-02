@@ -1,20 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
+import 'package:converter_hub/core/app_imports.dart';
 
-import 'package:converter_hub/core/constant/app_string.dart';
-import 'package:converter_hub/core/constant/image_constant.dart';
-import 'package:converter_hub/core/decoration/app_decoration.dart';
-import 'package:converter_hub/core/theme/app_colors.dart';
-import 'package:converter_hub/core/theme/app_styles.dart';
-import 'package:converter_hub/core/utils/ui_helper/ui_helper.dart';
-import 'package:converter_hub/presentation/widget/custom_app_bar.dart';
-import 'package:converter_hub/presentation/widget/custom_image.dart';
-import 'package:converter_hub/presentation/widget/custom_image_picker_dailoge.dart';
-import 'package:converter_hub/presentation/widget/custom_text.dart';
-import 'package:converter_hub/state_management/provider/image_to_text_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 class ImageToTextView extends StatefulWidget {
   const ImageToTextView({super.key});
@@ -33,7 +19,8 @@ class _ImageToTextViewState extends State<ImageToTextView> {
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Consumer<ImageToTextProvider>(
           builder: (context, imageToTextProvider, child) {
-            return imageToTextProvider.pickedImageList.isEmpty
+            return imageToTextProvider.pickedImageList.isEmpty &&
+                    !imageToTextProvider.isLoading
                 /// It execute when pickedimage list is empty
                 ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,

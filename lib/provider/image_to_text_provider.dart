@@ -1,10 +1,8 @@
 // ignore_for_file: unnecessary_null_comparison,
-
 import 'dart:io';
-
 import 'package:converter_hub/core/constant/app_string.dart';
 import 'package:converter_hub/core/theme/app_colors.dart';
-import 'package:converter_hub/core/utils/ui_helper/ui_helper.dart';
+import 'package:converter_hub/core/helper/ui_helper.dart';
 import 'package:converter_hub/presentation/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -15,7 +13,7 @@ class ImageToTextProvider extends ChangeNotifier {
   final TextRecognizer textRecognizer = TextRecognizer();
 
   bool _isLoading = false;
-  List<String> _extractTextList = [];
+  final List<String> _extractTextList = [];
   List<File> _pickedImageList = [];
   List<File> get pickedImageList => _pickedImageList;
   List<String> get extractTextList => _extractTextList;
@@ -28,6 +26,7 @@ class ImageToTextProvider extends ChangeNotifier {
     int imageQuantity = 10,
   }) async {
     List<XFile?> pickedImages = [];
+
     CustomLoader.showLoader(
       context: context,
       indigatorColor: AppColors.whiteColor,
@@ -51,6 +50,7 @@ class ImageToTextProvider extends ChangeNotifier {
     } else {
       UiHelper.customToast(msg: "Image not picked");
     }
+
     CustomLoader.dismisLoader();
     notifyListeners();
   }

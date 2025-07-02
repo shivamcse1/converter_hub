@@ -1,14 +1,4 @@
-import 'package:converter_hub/core/constant/image_constant.dart';
-import 'package:converter_hub/core/theme/app_colors.dart';
-import 'package:converter_hub/core/theme/app_styles.dart';
-import 'package:converter_hub/presentation/views/home/widget/custom_home_item.dart';
-import 'package:converter_hub/presentation/views/home/widget/custom_heading.dart';
-import 'package:converter_hub/presentation/views/home/speech_to_text_view.dart';
-import 'package:converter_hub/presentation/widget/custom_app_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../core/routes/app_routes.dart';
+import 'package:converter_hub/core/app_imports.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -46,43 +36,47 @@ class HomeViewState extends State<HomeView> {
                   SizedBox(width: 10.w),
 
                   Expanded(
-                    child: InkWell(
+                    child: CustomHomeItem(
+                      width: 125,
+                      radius: 15,
                       onTap: () {
                         Navigator.pushNamed(
                           context,
                           AppRoutes.speechToTextView,
                         );
                       },
-                      child: CustomHomeItem(
-                        width: 125,
-                        radius: 15,
-                        backgrounndColor: AppColors.whiteColor,
-                        image: ImageConstant.speechToText2Img,
-                        text: "Speech \nTo Text",
-                        textStyle: AppTextStyles.nunito15W600H1_4,
-                      ),
+                      backgrounndColor: AppColors.whiteColor,
+                      image: ImageConstant.speechToText2Img,
+                      text: "Speech \nTo Text",
+                      textStyle: AppTextStyles.nunito15W600H1_4,
+                    ),
+                  ),
+
+                  SizedBox(width: 10.w),
+
+                  Expanded(
+                    child: CustomHomeItem(
+                      width: 125,
+                      radius: 15,
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.imageToTextView);
+                      },
+                      image: ImageConstant.imageToTextImg,
+                      text: "Image \nTo Text",
+                      textStyle: AppTextStyles.nunito15W600H1_4,
                     ),
                   ),
                   SizedBox(width: 10.w),
 
                   Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.imageToTextView);
-                      },
-                      child: CustomHomeItem(
-                        width: 125,
-                        radius: 15,
-                        image: ImageConstant.imageToTextImg,
-                        text: "Image \nTo Text",
-                        textStyle: AppTextStyles.nunito15W600H1_4,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
                     child: CustomHomeItem(
                       radius: 15,
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.textToSpeechView,
+                        );
+                      },
                       backgrounndColor: AppColors.whiteColor,
                       image: ImageConstant.textToSpeechImg,
                       text: "Text \nTo Speech",
@@ -100,6 +94,9 @@ class HomeViewState extends State<HomeView> {
                   Expanded(
                     child: CustomHomeItem(
                       radius: 15,
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.imageToPdfView);
+                      },
                       backgrounndColor: AppColors.whiteColor,
                       image: ImageConstant.pdf2Img,
                       text: "Image \nTo PDF",

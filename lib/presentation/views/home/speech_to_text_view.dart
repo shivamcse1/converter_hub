@@ -1,20 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:converter_hub/core/constant/image_constant.dart';
-import 'package:converter_hub/core/theme/app_colors.dart';
-import 'package:converter_hub/core/theme/app_styles.dart';
-import 'package:converter_hub/core/utils/permission_handler/permission_handler.dart';
+import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/presentation/views/home/widget/speech_recognition_dialog_box.dart';
-import 'package:converter_hub/presentation/widget/custom_app_bar.dart';
-import 'package:converter_hub/presentation/widget/custom_image.dart';
-import 'package:converter_hub/state_management/provider/speech_to_text_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:converter_hub/services/permission_handler_service.dart';
+import '../../../provider/speech_to_text_provider.dart';
 
-import '../../../core/constant/app_string.dart';
-import '../../widget/custom_text.dart';
 
 class SpeechToTextView extends StatefulWidget {
   const SpeechToTextView({super.key});
@@ -129,7 +118,7 @@ class _SpeechToTextViewState extends State<SpeechToTextView> {
         elevation: 4,
         child: InkWell(
           onTap: () async {
-            final isValid = await PermissionHandler.micPermissionHandler();
+            final isValid = await PermissionHandlerService.micPermissionHandler();
             if (isValid) {
               await showDialog(
                 context: context,

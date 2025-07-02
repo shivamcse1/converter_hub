@@ -7,19 +7,19 @@ class CustomFloatingSheet extends StatelessWidget {
   final Color? iconColor;
   final Color? backgroundColor;
   final double? radius;
-  final void Function()? onCopy ;
-  final void Function()? onDelete ;
-  final void Function()? onShare ;
+  final void Function()? onCopy;
+  final void Function()? onDelete;
+  final void Function()? onShare;
 
   const CustomFloatingSheet({
-    super.key, 
-    this.iconColor, 
-    this.backgroundColor, 
-    this.radius, 
-    this.onCopy, 
-    this.onDelete, 
-    this.onShare, 
-    });
+    super.key,
+    this.iconColor,
+    this.backgroundColor,
+    this.radius,
+    this.onCopy,
+    this.onDelete,
+    this.onShare,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,22 @@ class CustomFloatingSheet extends StatelessWidget {
         children: [
           InkWell(
             onTap: onCopy,
-            child: Icon(Icons.copy, color: iconColor?? AppColors.primaryColor)),
+            child: Icon(Icons.copy, color: iconColor ?? AppColors.primaryColor),
+          ),
           InkWell(
             onTap: onShare,
-            child: Icon(Icons.share, color: iconColor?? AppColors.primaryColor)),
+            child: Icon(
+              Icons.share,
+              color: iconColor ?? AppColors.primaryColor,
+            ),
+          ),
           InkWell(
             onTap: onDelete,
-            child: Icon(Icons.delete, color: iconColor?? AppColors.primaryColor)),
+            child: Icon(
+              Icons.delete,
+              color: iconColor ?? AppColors.primaryColor,
+            ),
+          ),
         ],
       ),
     );
