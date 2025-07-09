@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 import 'package:converter_hub/core/app_imports.dart';
 
+import '../../../core/helper/image_picker_helper.dart';
 
 class ImageToTextView extends StatefulWidget {
   const ImageToTextView({super.key});
@@ -42,24 +43,20 @@ class _ImageToTextViewState extends State<ImageToTextView> {
                       children: [
                         InkWell(
                           onTap: () {
-                            showDialog(
+                            ImagePickerHelper.imagePickerDialog(
                               context: context,
-                              builder: (context) {
-                                return CustomImagePickerDailoge(
-                                  onCameraTap: () async {
-                                    Navigator.pop(context);
-                                    await imageToTextProvider.pickImage(
-                                      source: ImageSource.camera,
-                                      context: context,
-                                    );
-                                  },
-                                  onGalleryTap: () async {
-                                    Navigator.pop(context);
-                                    await imageToTextProvider.pickImage(
-                                      source: ImageSource.gallery,
-                                      context: context,
-                                    );
-                                  },
+                              onCameraTap: () async {
+                                Navigator.pop(context);
+                                await imageToTextProvider.pickImage(
+                                  source: ImageSource.camera,
+                                  context: context,
+                                );
+                              },
+                              onGalleryTap: () async {
+                                Navigator.pop(context);
+                                await imageToTextProvider.pickImage(
+                                  source: ImageSource.gallery,
+                                  context: context,
                                 );
                               },
                             );

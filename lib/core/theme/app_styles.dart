@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyles {
-
-
   static TextStyle get nunito12W400H1_4 => TextStyle(
     fontFamily: AppString.nunitoFontFamily,
     fontSize: 12.sp,
@@ -42,8 +40,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w900,
     height: 1.4,
   );
-
-
 
   static TextStyle get nunito13W400H1_4 => TextStyle(
     fontFamily: AppString.nunitoFontFamily,
@@ -100,6 +96,20 @@ class AppTextStyles {
     height: 1.4,
   );
 
+  static TextStyle get nunito14W600H1_4 => TextStyle(
+    fontFamily: AppString.nunitoFontFamily,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    height: 1.4,
+  );
+
+  static TextStyle get nunito14W700H1_4 => TextStyle(
+    fontFamily: AppString.nunitoFontFamily,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w700,
+    height: 1.4,
+  );
+
   static TextStyle get nunito15W400H1_4 => TextStyle(
     fontFamily: AppString.nunitoFontFamily,
     fontSize: 15.sp,
@@ -142,14 +152,12 @@ class AppTextStyles {
     height: 1.4,
   );
 
-
-    static TextStyle get nunito16W400H1_4 => TextStyle(
+  static TextStyle get nunito16W400H1_4 => TextStyle(
     fontFamily: AppString.nunitoFontFamily,
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     height: 1.4,
   );
-
 
   static TextStyle get nunito16W500H1_4 => TextStyle(
     fontFamily: AppString.nunitoFontFamily,

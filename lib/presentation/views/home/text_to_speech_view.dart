@@ -4,6 +4,7 @@ import 'package:converter_hub/core/utils/app_utils.dart';
 import 'package:converter_hub/presentation/widget/custom_button.dart';
 import 'package:converter_hub/presentation/widget/custom_floating_sheet.dart';
 import 'package:converter_hub/provider/text_to_speech_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/constant/app_key.dart';
 
@@ -37,6 +38,7 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
   Widget build(BuildContext context) {
     UiHelper.dbugPrint("ramam");
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppBar(
         isBackBtnVisible: true,
         title: AppString.textToSpeech,
@@ -67,22 +69,24 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
                 SizedBox(height: 24.h),
                 CustomText(
                   text: "Choose Language",
-                  style: AppTextStyles.nunito15W600H1_4,
+                  style: AppTextStyles.nunito15W700H1_4,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 5.h),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
+                    color: AppColors.whiteColor,
                     border: Border.all(color: AppColors.borderColor),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
+                      dropdownColor: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(10.r),
+                      menuMaxHeight: 300.h,
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       value: textToSpeechProvider.selectedLanguage,
                       items:
                           LanguageConstant.languageList.map((singleItem) {
-                            
                             return DropdownMenuItem(
                               value: singleItem[AppKey.code],
                               child: CustomText(
@@ -109,10 +113,15 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 30.h),
         child: CustomFloatingSheet(
+          backgroundColor: AppColors.whiteColor,
           onCopy: () {
             UiHelper.copyData(data: textToSpeechProvider.textController.text);
           },
-          onShare: () {},
+          onShare: () {
+            final videoLink =
+                "https://www.youtube.com/watch?v=3wOlcOMrYZ8&list=RD3wOlcOMrYZ8&start_radio=1";
+            Share.share('Check out this link: $videoLink');
+          },
           onDelete: () {
             textToSpeechProvider.textController.clear();
             textToSpeechProvider.update();
@@ -127,7 +136,7 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
             child: CustomElevatedButton(
               radius: 0,
               buttonColor: AppColors.primaryColor,
-              buttonTextStyle: AppTextStyles.nunito14W500H1_4.copyWith(
+              buttonTextStyle: AppTextStyles.nunito14W700H1_4.copyWith(
                 color: AppColors.whiteColor,
               ),
               preWidget: Icon(
@@ -137,6 +146,7 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
                 color: AppColors.whiteColor,
               ),
               buttonText: textToSpeechProvider.isSpeaking ? "Stop" : "Speak",
+
               onTap:
                   textToSpeechProvider.isSpeaking
                       ? null
@@ -153,7 +163,7 @@ class _TextToSpeechViewState extends State<TextToSpeechView> {
               radius: 0,
               buttonColor: AppColors.greyColor,
               preWidget: Icon(Icons.stop, color: AppColors.whiteColor),
-              buttonTextStyle: AppTextStyles.nunito14W500H1_4.copyWith(
+              buttonTextStyle: AppTextStyles.nunito14W700H1_4.copyWith(
                 color: AppColors.whiteColor,
               ),
               buttonText: "Stop",
