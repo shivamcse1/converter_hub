@@ -1,6 +1,6 @@
 import 'package:converter_hub/presentation/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:converter_hub/presentation/views/home/home_view.dart';
-import 'package:converter_hub/presentation/views/home/image_to_pdf_view.dart';
+import 'package:converter_hub/presentation/views/home/image_to_pdf/image_to_pdf_view.dart';
 import 'package:converter_hub/presentation/views/home/image_to_text_view.dart';
 import 'package:converter_hub/presentation/views/home/speech_to_text_view.dart';
 import 'package:converter_hub/presentation/views/home/text_to_speech_view.dart';

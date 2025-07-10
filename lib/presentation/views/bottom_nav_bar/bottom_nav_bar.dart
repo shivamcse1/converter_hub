@@ -4,7 +4,6 @@ import 'package:converter_hub/presentation/views/history/history_view.dart';
 import 'package:converter_hub/presentation/views/home/home_view.dart';
 import 'package:converter_hub/presentation/views/profile/profile_view.dart';
 
-
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
@@ -38,10 +37,10 @@ Widget bottomNavBar() {
       ),
     ),
     child: TabBar(
+      labelStyle: AppTextStyles.nunito14W700H1_4,
       indicatorColor: AppColors.secondaryColor,
       padding: EdgeInsets.zero,
-      onTap: (index) {
-      },
+      onTap: (index) {},
       indicatorPadding: EdgeInsets.only(bottom: 60.h, left: 45.w, right: 45.w),
       indicatorSize: TabBarIndicatorSize.tab,
       labelColor: AppColors.primaryColor,

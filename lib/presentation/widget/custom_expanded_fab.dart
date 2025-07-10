@@ -50,7 +50,7 @@ class CustomExpandedFAB extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20),
                   child: _buildExpandedFAB(
                     icon: singleItem.icon,
-                    tag: singleItem.tag,
+                    tag:  "btn$index",
                     label: singleItem.label,
                     onTap: singleItem.onTap,
                   ),
@@ -119,13 +119,13 @@ class CustomExpandedFAB extends StatelessWidget {
 ///model class for expandedFAB
 class ExpandedFABItem {
   final IconData icon;
-  final String tag;
+  final String? tag;
   final String? label;
   final VoidCallback? onTap;
 
   ExpandedFABItem({
     required this.icon,
-    required this.tag,
+    this.tag,
     this.label,
     this.onTap,
   });

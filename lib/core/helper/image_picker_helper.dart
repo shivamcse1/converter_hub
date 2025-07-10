@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:converter_hub/core/app_imports.dart';
 
 class ImagePickerHelper {
   static ImagePicker picker = ImagePicker();
 
-  static Future<List<File>> pickImage({
+  static Future<List<XFile>> pickImage({
     ImageSource? imageSource,
     int imageLimit = 20,
     double maxWidth = 1024,
@@ -21,7 +19,7 @@ class ImagePickerHelper {
             maxWidth: maxWidth,
           );
           if (image != null) {
-            return [File(image.path)];
+            return [image];
           }
           return [];
         case null:
@@ -30,7 +28,7 @@ class ImagePickerHelper {
             imageQuality: imageQuality,
             maxWidth: maxWidth,
           );
-          return pickedImages.map((xfile) => File(xfile.path)).toList();
+          return pickedImages;
       }
     } catch (e) {
       debugPrint('Image pick error: $e');

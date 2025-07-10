@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/core/helper/image_picker_helper.dart';
+import 'package:converter_hub/presentation/views/home/image_to_pdf/selected_image_view.dart';
 import 'package:converter_hub/presentation/widget/custom_expanded_fab.dart';
 import 'package:converter_hub/provider/image_to_pdf_provider.dart';
 
@@ -31,10 +34,13 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomImage(
-                image: ImageConstant.cloudUploadIc,
-                height: 100.h,
-                width: 100.w,
+              InkWell(
+                onTap: () {},
+                child: CustomImage(
+                  image: ImageConstant.cloudUploadIc,
+                  height: 100.h,
+                  width: 100.w,
+                ),
               ),
               CustomText(
                 text: AppString.uploadOrPickImageFromDevice,
@@ -59,23 +65,29 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
               expandedFAB: [
                 ExpandedFABItem(
                   icon: Icons.camera_alt,
-                  tag: "tag1",
-                  // label: "Camera",
+                  label: "Camera",
                   onTap: () async {
-                    final imageList = await ImagePickerHelper.pickImage();
-
-                    debugPrint("Image is $imageList");
+                    await ImagePickerHelper.pickImage().then((value) {
+                      if (value.isNotEmpty) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    SelectedImageView(imageList: value),
+                          ),
+                        );
+                      }
+                    });
                   },
                 ),
                 ExpandedFABItem(
                   icon: Icons.image,
-                  tag: "tag2",
                   label: "Gallery",
                   onTap: () {},
                 ),
                 ExpandedFABItem(
                   icon: Icons.folder,
-                  tag: "tag3",
                   label: "Multiple",
                   onTap: () {},
                 ),
