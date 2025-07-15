@@ -1,18 +1,35 @@
-import 'package:converter_hub/core/helper/ui_helper.dart';
+import 'package:converter_hub/core/app_imports.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionHandlerService {
-
-
- /// It used for mic permission
+  /// It used for mic permission
   static Future<bool> micPermissionHandler() async {
     final PermissionStatus micStatus = await Permission.microphone.status;
-    if(micStatus.isGranted == true) return true;
+    if (micStatus.isGranted == true) return true;
     bool status = await statusHandler(
       permission: Permission.microphone,
       status: micStatus,
     );
     return status;
+  }
+
+  static Future<bool> storagePermissionHandler() async {
+    final PermissionStatus storageStatus = await Permission.storage.status;
+    if (storageStatus.isGranted) {
+      debugPrint("Storage access allowed");
+      return true;
+    } else {
+      final PermissionStatus status = await Permission.storage.request();
+      if (status.isGranted) {
+        debugPrint("Storage access allowed");
+        return true;
+      } else if (status.isPermanentlyDenied) {
+        openAppSettings();
+        return false;
+      } else {
+        return false;
+      }
+    }
   }
 
   /// it handle only status of any permisison
@@ -42,6 +59,4 @@ class PermissionHandlerService {
         return false;
     }
   }
-
-  
 }

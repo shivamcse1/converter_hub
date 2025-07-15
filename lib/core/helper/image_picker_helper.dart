@@ -36,11 +36,12 @@ class ImagePickerHelper {
     }
   }
 
-  static void imagePickerDialog({
+  static Future<void> imagePickerDialog({
     required BuildContext context,
     VoidCallback? onCameraTap,
     VoidCallback? onGalleryTap,
-  }) {
+  }) async {
+    Future.delayed(Duration(seconds: 0));
     showDialog(
       context: context,
       builder: (context) {
@@ -94,4 +95,5 @@ class ImagePickerHelper {
       },
     );
   }
+
 }

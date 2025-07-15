@@ -1,5 +1,7 @@
 import 'package:converter_hub/core/app_imports.dart';
 
+import '../../config/app_config.dart';
+
 class CustomExpandedFAB extends StatelessWidget {
   final Color? bgColor;
   final Color? iconColor;
@@ -31,7 +33,7 @@ class CustomExpandedFAB extends StatelessWidget {
         Align(
           alignment: Alignment.bottomRight,
           child: FloatingActionButton(
-            heroTag: "btn0",
+            heroTag: "btn",
             onPressed: fabTap,
             backgroundColor: bgColor,
             child: Icon(fabIcon, color: iconColor),
@@ -50,7 +52,7 @@ class CustomExpandedFAB extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20),
                   child: _buildExpandedFAB(
                     icon: singleItem.icon,
-                    tag:  "btn$index",
+                    tag: "btn$index",
                     label: singleItem.label,
                     onTap: singleItem.onTap,
                   ),
@@ -67,7 +69,7 @@ class CustomExpandedFAB extends StatelessWidget {
     required IconData icon,
     required String tag,
     String? label,
-    double labelWidth = 80,
+    double labelWidth = 70,
     VoidCallback? onTap,
   }) {
     return TweenAnimationBuilder(
@@ -89,7 +91,7 @@ class CustomExpandedFAB extends StatelessWidget {
                         lableStyle ??
                         TextStyle(
                           fontSize: 16.sp,
-                          fontFamily: AppString.nunitoFontFamily,
+                          fontFamily: AppConfig.nunitoFontFamily,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
@@ -123,10 +125,5 @@ class ExpandedFABItem {
   final String? label;
   final VoidCallback? onTap;
 
-  ExpandedFABItem({
-    required this.icon,
-    this.tag,
-    this.label,
-    this.onTap,
-  });
+  ExpandedFABItem({required this.icon, this.tag, this.label, this.onTap});
 }

@@ -1,13 +1,13 @@
-import 'package:converter_hub/core/routes/app_routes.dart';
-import 'package:converter_hub/core/theme/app_colors.dart';
+import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/provider/text_to_speech_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'provider/image_to_text_provider.dart';
 import 'provider/speech_to_text_provider.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+    await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown, 
+  ]);
   runApp(const MyApp());
 }
 
