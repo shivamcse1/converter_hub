@@ -1,4 +1,5 @@
 import 'package:converter_hub/core/app_imports.dart';
+import 'package:converter_hub/provider/image_to_pdf_provider.dart';
 import 'package:converter_hub/provider/text_to_speech_provider.dart';
 import 'provider/speech_to_text_provider.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context)=> SpeechToTextProvider()),
               ChangeNotifierProvider(create: (context)=> ImageToTextProvider()),
               ChangeNotifierProvider(create: (context)=> TextToSpeechProvider()),
+              ChangeNotifierProvider(create: (context)=> ImageToPdfProvider()),
           ],
           builder: (context,child) {
             return MaterialApp(

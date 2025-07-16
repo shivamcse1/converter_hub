@@ -59,8 +59,7 @@ class PdfServices {
         if (!await downloadDirectory.exists()) {
           await downloadDirectory.create(recursive: true);
         }
-        final pdfName =
-            documentName ??
+        final pdfName = documentName!=null ? "$documentName.pdf" :
             "${AppConfig.appName}${DateTime.now().millisecondsSinceEpoch}.pdf";
         final pdfPath = "${downloadDirectory.path}/$pdfName";
         final file = File(pdfPath);

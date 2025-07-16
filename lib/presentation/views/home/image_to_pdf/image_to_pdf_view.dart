@@ -1,8 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:io';
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/presentation/views/home/image_to_pdf/image_picker_loder_view.dart';
 import 'package:converter_hub/presentation/widget/custom_expanded_fab.dart';
 import 'package:converter_hub/provider/image_to_pdf_provider.dart';
+
+import '../../../../data/models/pdf_model.dart';
 
 class ImageToPdfView extends StatefulWidget {
   const ImageToPdfView({super.key});
@@ -12,91 +15,102 @@ class ImageToPdfView extends StatefulWidget {
 }
 
 class _ImageToPdfViewState extends State<ImageToPdfView> {
-  late ImageToPdfProvider imageToPdf;
+  late ImageToPdfProvider imageToPdfProvider;
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      imageToPdf = Provider.of<ImageToPdfProvider>(context, listen: false);
-      imageToPdf.init();
+      imageToPdfProvider = context.read<ImageToPdfProvider>();
+      imageToPdfProvider.fetchAllPdf();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ImageToPdfProvider(),
-      child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        appBar: CustomAppBar(
-          isBackBtnVisible: true,
-          title: AppString.imageToPdf,
-          titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
-            color: AppColors.whiteColor,
-          ),
-          isTitleCentered: true,
-          appBarColor: AppColors.primaryColor,
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      appBar: CustomAppBar(
+        isBackBtnVisible: true,
+        title: AppString.imageToPdf,
+        titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+          color: AppColors.whiteColor,
         ),
-        body: Consumer<ImageToPdfProvider>(
-          builder: (context, imageToPdfProvider, child) {
-            imageToPdfProvider.init();
-            return _emptyImageSection();
-          },
-        ),
+        isTitleCentered: true,
+        appBarColor: AppColors.primaryColor,
+      ),
+      body: Consumer<ImageToPdfProvider>(
+        builder: (context, imageToPdfProvider, child) {
+          return imageToPdfProvider.isLoading
+              ? Center(
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
+              )
+              : imageToPdfProvider.allGeneratedPdf.isNotEmpty
+              ? ListView.separated(
+                itemCount: imageToPdfProvider.allGeneratedPdf.length,
+                separatorBuilder: (context, index) {
+                  return Divider(color: AppColors.greyColor);
+                },
+                itemBuilder: (context, index) {
+                  final pdfData = imageToPdfProvider.allGeneratedPdf[index];
+                  return _buildPdfItem(pdfData: pdfData);
+                },
+              )
+              : _emptyImageSection();
+        },
+      ),
 
-        floatingActionButton: Consumer<ImageToPdfProvider>(
-          builder: (ctx, imageToPdfProvider, child) {
-            return CustomExpandedFAB(
-              fabIcon: imageToPdfProvider.isExapnded ? Icons.clear : Icons.add,
-              fabTap: () {
-                imageToPdfProvider.isExapnded = !imageToPdfProvider.isExapnded;
-                imageToPdfProvider.update();
-              },
-              isExpand: imageToPdfProvider.isExapnded,
+      floatingActionButton: Consumer<ImageToPdfProvider>(
+        builder: (ctx, imageToPdfProvider, child) {
+          return CustomExpandedFAB(
+            fabIcon: imageToPdfProvider.isExapnded ? Icons.clear : Icons.add,
+            fabTap: () {
+              imageToPdfProvider.setExpandFAB();
+            },
+            isExpand: imageToPdfProvider.isExapnded,
 
-              expandedFAB: [
-                ExpandedFABItem(
-                  icon: Icons.camera_alt,
-                  label: AppString.camera,
-                  onTap: () {
-                    Navigator.push(
-                      ctx,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => ChangeNotifierProvider.value(
-                              value: imageToPdfProvider,
-                              child: ImagePickerLoaderView(),
-                            ),
-                      ),
-                    );
-                  },
-                ),
-                ExpandedFABItem(
-                  icon: Icons.image,
-                  label: AppString.gallery,
-                  onTap: () {
-                    Navigator.push(
-                      ctx,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => ChangeNotifierProvider.value(
-                              value: imageToPdfProvider,
-                              child: ImagePickerLoaderView(),
-                            ),
-                      ),
-                    );
-                  },
-                ),
-                // ExpandedFABItem(
-                //   icon: Icons.folder,
-                //   label: AppString.file,
-                //   onTap: () {},
-                // ),
-              ],
-            );
-          },
-        ),
+            expandedFAB: [
+              ExpandedFABItem(
+                icon: Icons.camera_alt,
+                label: AppString.camera,
+                onTap: () {
+                  imageToPdfProvider.setExpandFAB();
+                  Navigator.push(
+                    ctx,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => ChangeNotifierProvider.value(
+                            value: imageToPdfProvider,
+                            child: ImagePickerLoaderView(),
+                          ),
+                    ),
+                  );
+                },
+              ),
+              ExpandedFABItem(
+                icon: Icons.image,
+                label: AppString.gallery,
+                onTap: () {
+                  imageToPdfProvider.setExpandFAB();
+                  Navigator.push(
+                    ctx,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => ChangeNotifierProvider.value(
+                            value: imageToPdfProvider,
+                            child: ImagePickerLoaderView(),
+                          ),
+                    ),
+                  );
+                },
+              ),
+              // ExpandedFABItem(
+              //   icon: Icons.folder,
+              //   label: AppString.file,
+              //   onTap: () {},
+              // ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -122,6 +136,51 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
 
           SizedBox(height: 70.h),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPdfItem({required PdfModel pdfData}) {
+    return Padding(
+      padding: EdgeInsets.only(top: 5.h),
+      child: ListTile(
+        leading: Container(
+          height: 50.h,
+          width: 50.w,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppDecoration.radius10),
+          ),
+          child: Image.asset(ImageConstant.pdf2Img),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              maxLines: 3,
+              text: pdfData.pdfName,
+              style: AppTextStyles.nunito14W700H1_4,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomText(
+                  text: "${pdfData.size} MB",
+                  style: AppTextStyles.nunito12W500H1_4.copyWith(
+                    color: AppColors.darkGreyColor,
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                CustomText(
+                  text: pdfData.createDate,
+                  style: AppTextStyles.nunito12W500H1_4.copyWith(
+                    color: AppColors.darkGreyColor,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        trailing: Icon(Icons.more_vert),
       ),
     );
   }

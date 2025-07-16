@@ -2,9 +2,7 @@
 import 'dart:io';
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/data/models/pdf_image_model.dart';
-import 'package:converter_hub/presentation/widget/custom_loader.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:lottie/lottie.dart';
+import 'package:pdf/pdf.dart';
 import '../../../../provider/image_to_pdf_provider.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_textfield.dart';
@@ -109,7 +107,13 @@ class _PdfSaveViewState extends State<PdfSaveView> {
           ),
           content: CustomTextField(
             controller: pdfProvider.pdfNameController,
-            suffix: Icon(Icons.cancel, color: AppColors.greyColor),
+            suffix: InkWell(
+              onTap: () {
+                pdfProvider.pdfNameController.clear();
+                pdfProvider.update();
+              },
+              child: Icon(Icons.cancel, color: AppColors.greyColor),
+            ),
           ),
           actions: [
             CustomTextButton(
@@ -126,7 +130,11 @@ class _PdfSaveViewState extends State<PdfSaveView> {
               buttonTextStyle: AppTextStyles.nunito16W700H1_4.copyWith(
                 color: AppColors.successColor,
               ),
-              onTap: () {},
+              onTap: () {
+                pdfProvider.pdfName = pdfProvider.pdfNameController.text;
+                pdfProvider.update();
+                Navigator.pop(context);
+              },
             ),
           ],
         );
