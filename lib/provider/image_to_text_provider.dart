@@ -48,7 +48,7 @@ class ImageToTextProvider extends ChangeNotifier {
         await extractText(image: img);
       }
     } else {
-      UiHelper.customToast(msg: "Image not picked");
+      UiHelper.showCustomToast(msg: "Image not picked");
     }
 
     CustomLoader.dismisLoader();

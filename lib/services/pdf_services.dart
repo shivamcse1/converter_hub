@@ -59,8 +59,10 @@ class PdfServices {
         if (!await downloadDirectory.exists()) {
           await downloadDirectory.create(recursive: true);
         }
-        final pdfName = documentName!=null ? "$documentName.pdf" :
-            "${AppConfig.appName}${DateTime.now().millisecondsSinceEpoch}.pdf";
+        final pdfName =
+            documentName != null
+                ? "$documentName.pdf"
+                : "${AppConfig.appName}${DateTime.now().millisecondsSinceEpoch}.pdf";
         final pdfPath = "${downloadDirectory.path}/$pdfName";
         final file = File(pdfPath);
 
@@ -69,12 +71,12 @@ class PdfServices {
 
         // ye byte data  ko actual file banakar storage me likhta hai
         await file.writeAsBytes(pdfByteData);
-        UiHelper.customToast(msg: AppString.pdfSaveSuccessfully);
+        UiHelper.showCustomToast(msg: AppString.pdfSaveSuccessfully);
       } else {
-        UiHelper.customToast(msg: "Storage Permission Not Allowed");
+        UiHelper.showCustomToast(msg: "Storage Permission Not Allowed");
       }
     } catch (ex) {
-      UiHelper.customToast(msg: AppString.somethingWentWrong);
+      UiHelper.showCustomToast(msg: AppString.somethingWentWrong);
     }
   }
 

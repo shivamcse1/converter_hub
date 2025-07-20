@@ -1,11 +1,21 @@
+import 'dart:io';
+
 class PdfModel {
+  File pdf;
   String pdfName;
   String? image;
   String size;
   String createDate;
   String? time;
 
-  PdfModel({required this.createDate, this.image, required this.pdfName, required this.size,this.time});
+  PdfModel({
+    required this.pdf,
+    required this.createDate,
+    this.image,
+    required this.pdfName,
+    required this.size,
+    this.time,
+  });
 
   factory PdfModel.fromJson(Map<String, dynamic> json) {
     return PdfModel(
@@ -13,17 +23,19 @@ class PdfModel {
       createDate: json["createDate"],
       image: json["image"],
       size: json["size"],
-      time : json["size"]
+      time: json["size"],
+      pdf: json["pdf"]
     );
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      "image" :image,
-      "createDate" : createDate,
-      "pdfName" : pdfName,
-      "size" : size,
-      "time" : time
+      "image": image,
+      "createDate": createDate,
+      "pdfName": pdfName,
+      "size": size,
+      "time": time,
+       "pdf" : pdf
     };
   }
 }

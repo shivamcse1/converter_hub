@@ -18,9 +18,9 @@ class UiHelper {
   }
 
   // show custom toast
-  static customToast({
+  static showCustomToast({
     String msg = AppString.issueOccurred,
-    ToastGravity toastGravity = ToastGravity.CENTER,
+    ToastGravity toastGravity = ToastGravity.BOTTOM,
     Color toastColor = AppColors.errorColor,
     Color textColor = AppColors.whiteColor,
   }) {
@@ -37,7 +37,7 @@ class UiHelper {
 
   static copyData({required String data}) {
     Clipboard.setData(ClipboardData(text: data));
-    customToast(msg: "Text copied", toastColor: AppColors.greyColor);
+    showCustomToast(msg: "Text copied", toastColor: AppColors.greyColor);
   }
 
   static showLoder({required BuildContext context}) {
@@ -65,8 +65,7 @@ class UiHelper {
     );
   }
 
-  static dismissLoder(){
+  static dismissLoder() {
     CustomLoader.dismisLoader();
   }
-
 }

@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:io';
 import 'package:converter_hub/core/app_imports.dart';
+import 'package:converter_hub/core/helper/share_helper.dart';
 import 'package:converter_hub/presentation/views/home/image_to_pdf/image_picker_loder_view.dart';
+import 'package:converter_hub/presentation/views/home/image_to_pdf/pdf_view.dart';
 import 'package:converter_hub/presentation/widget/custom_expanded_fab.dart';
 import 'package:converter_hub/provider/image_to_pdf_provider.dart';
-
 import '../../../../data/models/pdf_model.dart';
 
 class ImageToPdfView extends StatefulWidget {
@@ -52,7 +52,20 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
                 },
                 itemBuilder: (context, index) {
                   final pdfData = imageToPdfProvider.allGeneratedPdf[index];
-                  return _buildPdfItem(pdfData: pdfData);
+                  return _buildPdfItem(
+                    pdfData: pdfData,
+                    index: index,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  PdfPageView(pdfData: pdfData),
+                        ),
+                      );
+                    },
+                  );
                 },
               )
               : _emptyImageSection();
@@ -140,10 +153,15 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
     );
   }
 
-  Widget _buildPdfItem({required PdfModel pdfData}) {
+  Widget _buildPdfItem({
+    required PdfModel pdfData,
+    required int index,
+    VoidCallback? onTap,
+  }) {
     return Padding(
       padding: EdgeInsets.only(top: 5.h),
       child: ListTile(
+        onTap: onTap,
         leading: Container(
           height: 50.h,
           width: 50.w,
@@ -180,7 +198,31 @@ class _ImageToPdfViewState extends State<ImageToPdfView> {
             ),
           ],
         ),
-        trailing: Icon(Icons.more_vert),
+        trailing: PopupMenuButton(
+          padding: EdgeInsets.only(left: 30.w),
+          itemBuilder: (context) {
+            return [
+              PopupMenuItem(
+                value: 1,
+                onTap: () {
+                  ShareHelper.shareFiles(
+                    singlefile: pdfData.pdf,
+                    sharingText: "Checkout this pdf${pdfData.pdfName}",
+                  );
+                },
+                child: CustomText(text: "Share"),
+              ),
+              PopupMenuItem(
+                value: 2,
+                onTap: () async {
+                  await imageToPdfProvider.deletePdf(pdfFile: pdfData.pdf);
+                  imageToPdfProvider.allGeneratedPdf.removeAt(index);
+                },
+                child: CustomText(text: "Delete"),
+              ),
+            ];
+          },
+        ),
       ),
     );
   }

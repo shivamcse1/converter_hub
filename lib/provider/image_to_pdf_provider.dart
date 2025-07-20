@@ -7,7 +7,6 @@ import 'package:converter_hub/core/helper/image_picker_helper.dart';
 import 'package:converter_hub/data/models/pdf_model.dart';
 import 'package:converter_hub/services/pdf_services.dart';
 import 'package:converter_hub/services/permission_handler_service.dart';
-import 'package:pdf/pdf.dart';
 import 'package:path/path.dart' as p;
 import '../data/models/pdf_image_model.dart';
 
@@ -40,11 +39,12 @@ class ImageToPdfProvider extends ChangeNotifier {
   void init() async {
     await fetchAllPdf();
   }
-  
-  void setExpandFAB(){
-    _isExapnded =!_isExapnded;
+
+  void setExpandFAB() {
+    _isExapnded = !_isExapnded;
     notifyListeners();
   }
+
   void updatePageIndex({required int index}) {
     roationAngle = 0.0;
     _currentIndex = index;
@@ -159,6 +159,7 @@ class ImageToPdfProvider extends ChangeNotifier {
           allPdf.map((singlePdf) async {
             final date = await fetchPdfDate(pdfFile: singlePdf);
             return PdfModel(
+              pdf: singlePdf,
               createDate: date,
               pdfName: p.basename(singlePdf.path),
               size: (singlePdf.lengthSync() / (1024 * 1024)).toStringAsFixed(2),
@@ -181,5 +182,20 @@ class ImageToPdfProvider extends ChangeNotifier {
   Future<String> fetchPdfDate({required File pdfFile}) async {
     final pdfDate = await pdfFile.stat();
     return '${pdfDate.changed.day}/${pdfDate.changed.month}/${pdfDate.changed.year}';
+  }
+
+  Future<void> deletePdf({required File pdfFile}) async {
+    try {
+      if (await pdfFile.exists()) {
+        await pdfFile.delete();
+        UiHelper.showCustomToast(msg: "File deleted successfully");
+      } else {
+        UiHelper.showCustomToast(msg: "File does not exist!");
+      }
+    } catch (ex) {
+      debugPrint("Exception occurred while deleting pdf file:$ex");
+    } finally {
+      notifyListeners();
+    }
   }
 }
