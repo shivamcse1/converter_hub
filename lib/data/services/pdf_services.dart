@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:converter_hub/config/app_config.dart';
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/data/models/pdf_image_model.dart';
-import 'package:converter_hub/services/permission_handler_service.dart';
+import 'package:converter_hub/data/services/permission_handler_service.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -52,7 +52,7 @@ class PdfServices {
 
   Future<void> savePdf({required pw.Document pdf, String? documentName}) async {
     try {
-      if (await PermissionHandlerService.storagePermissionHandler()) {
+      if (await PermissionHandlerService.checkStoragePermission()) {
         final downloadDirectory = Directory(AppConfig.internalStoragePath);
 
         //if download folder not exist then create it

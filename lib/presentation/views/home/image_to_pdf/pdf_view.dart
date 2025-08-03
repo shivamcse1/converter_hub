@@ -16,7 +16,14 @@ class _PdfPageViewState extends State<PdfPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CustomAppBar(title: widget.pdfData.pdfName),
+      appBar: CustomAppBar(
+        isBackBtnVisible: true,
+        title: widget.pdfData.pdfName,
+        titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+          color: AppColors.whiteColor,
+        ),
+        appBarColor: AppColors.primaryColor,
+      ),
       body: SfPdfViewer.file(
         File(widget.pdfData.pdf.path),
         enableTextSelection: true,

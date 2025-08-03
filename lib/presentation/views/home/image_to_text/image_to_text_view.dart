@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 import 'package:converter_hub/core/app_imports.dart';
 
-import '../../../core/helper/image_picker_helper.dart';
+import '../../../../core/helper/image_picker_helper.dart';
 
 class ImageToTextView extends StatefulWidget {
   const ImageToTextView({super.key});
@@ -15,7 +15,15 @@ class _ImageToTextViewState extends State<ImageToTextView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CustomAppBar(isTitleCentered: true, title: AppString.imageToText),
+      appBar: CustomAppBar(
+        isBackBtnVisible: true,
+        title: AppString.imageToText,
+        titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+          color: AppColors.whiteColor,
+        ),
+        isTitleCentered: true,
+        appBarColor: AppColors.primaryColor,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Consumer<ImageToTextProvider>(

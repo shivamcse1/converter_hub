@@ -1,10 +1,10 @@
-import 'package:converter_hub/core/theme/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// ignore_for_file: unused_import
+import '../../core/app_imports.dart';
+import '../../core/theme/app_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool? focus;
+  final int? maxLines;
   final bool? readOnly;
   final bool obscureText;
   final String obscuringCharacter;
@@ -59,6 +59,7 @@ class CustomTextField extends StatelessWidget {
     this.backGroundColor,
     this.hintText,
     this.hintStyle,
+    this.maxLines,
   });
 
   @override
@@ -68,29 +69,34 @@ class CustomTextField extends StatelessWidget {
       padding: padding,
       height: height?.h,
       width: width?.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius!.r),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(radius!.r)),
       child: TextFormField(
         validator: validator,
+        maxLines: maxLines,
         obscureText: obscureText,
         obscuringCharacter: obscuringCharacter,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         textAlignVertical: TextAlignVertical.center,
         textAlign: contentAlign ?? TextAlign.start,
         readOnly: readOnly ?? false,
-        style: contentStyle ,
+        style: contentStyle,
         onChanged: onChanged,
         inputFormatters: [LengthLimitingTextInputFormatter(maxDigitLength)],
         autofocus: focus ?? false,
         keyboardType: keyboardType,
         controller: controller,
         decoration: InputDecoration(
-          hintStyle: hintStyle ?? TextStyle(color: AppColors.greyColor),
+          hintStyle:
+              hintStyle ??
+              AppTextStyles.nunito14W600H1_4.copyWith(
+                color: AppColors.greyColor,
+              ),
           hintText: hintText,
-          errorStyle: const TextStyle(height: .1),
+          errorStyle: const TextStyle(height: .5),
           contentPadding: EdgeInsets.symmetric(
-              vertical: (height! - 20) / 2 - 2, horizontal: 10.w),
+            vertical: (height! - 20) / 2 - 2,
+            horizontal: 10.w,
+          ),
           filled: true,
           fillColor: backGroundColor ?? AppColors.whiteColor,
           suffixIcon: suffix,
@@ -103,11 +109,17 @@ class CustomTextField extends StatelessWidget {
             borderSide: const BorderSide(color: AppColors.greyColor),
           ),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: enableBorderColor ?? AppColors.greyColor),
-              borderRadius: BorderRadius.circular(radius!.r)),
+            borderSide: BorderSide(
+              color: enableBorderColor ?? AppColors.greyColor,
+            ),
+            borderRadius: BorderRadius.circular(radius!.r),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius!.r),
-              borderSide: BorderSide(color: focusBorderColor ?? AppColors.greyColor)),
+            borderRadius: BorderRadius.circular(radius!.r),
+            borderSide: BorderSide(
+              color: focusBorderColor ?? AppColors.greyColor,
+            ),
+          ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius!.r),
             borderSide: const BorderSide(color: AppColors.errorColor),

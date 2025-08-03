@@ -1,4 +1,6 @@
 class ImageConstant {
+  static String iconBasePath = "assets/icons/";
+  static String imageBasePath = "assets/images/";
   //!------------- Icon String--------------------///
 
   static String previewIc = "assets/icons/preview_ic.png";
@@ -8,14 +10,26 @@ class ImageConstant {
   static String warningIc = "assets/icons/warning_ic.png";
   static String imageErrorIc = "assets/icons/image_error_ic.png";
   static String cloudUploadIc = "assets/icons/cloud_upload_ic.png";
+  static String instagramIc = "assets/icons/instagram_ic.png";
+  static String facebookIc = "assets/icons/facebook_ic.png";
+  static String whatsappIc = "assets/icons/whatsapp_ic.png";
+  static String twitterIc = "assets/icons/twitter_ic.png";
+  static String tiktokIc = "assets/icons/tiktok_ic.png";
+  static String githubIc = "assets/icons/github_ic.png";
+  static String linkedinIc = "assets/icons/linkedin_ic.png";
+  static String snapchatIc = "assets/icons/snapchat_ic.png";
+  static String telegramIc = "assets/icons/telegram_ic.png";
+  static String youtubeIc = "assets/icons/youtube_ic.png";
 
   ///------------------Lottie Json----------------------///
 
-  static String colorfullLoder = "assets/images/lottie/colorfull_loder.json";
-  static String voiceListner = "assets/images/lottie/voice_listner.json";
+  static String colorfullLoder = "${imageBasePath}lottie/colorfull_loder.json";
+  static String voiceListner = "${imageBasePath}lottie/voice_listner.json";
   static String voiceListnerIndigator =
-      "assets/images/lottie/voice_listner_indigator.json";
-  static String waveLoder = "assets/images/lottie/wave_loder.json";
+      "${imageBasePath}lottie/voice_listner_indigator.json";
+  static String waveLoder = "${imageBasePath}lottie/wave_loder.json";
+
+
 
   ///-------------- Image String-----------------------///
 
@@ -55,4 +69,9 @@ class ImageConstant {
   static String voiceImg = "assets/images/voice_img.png";
   static String voice2Img = "assets/images/voice2_img.png";
   static String profileImg = "assets/images/profile_img.jpg";
+
+  static String highImg = "assets/images/high_img.png";
+  static String mediumImg = "assets/images/medium_img.png";
+  static String longImg = "assets/images/long_img.png";
+  static String qImg = "assets/images/q_img.png";
 }

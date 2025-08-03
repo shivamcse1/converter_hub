@@ -34,6 +34,11 @@ class _PdfSaveViewState extends State<PdfSaveView> {
           backgroundColor: AppColors.backgroundColor,
           appBar: CustomAppBar(
             title: imageToPdfProvider.pdfName,
+            titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+              color: AppColors.whiteColor,
+            ),
+
+            appBarColor: AppColors.primaryColor,
             actions: [
               Padding(
                 padding: EdgeInsets.only(bottom: 3.h),

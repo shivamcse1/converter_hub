@@ -24,6 +24,11 @@ class _SelectedImageViewState extends State<SelectedImageView> {
                 .pdfImages[imageToPdfProvider.currentIndex]
                 .imageName
                 .substring(7),
+            titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+              color: AppColors.whiteColor,
+            ),
+            appBarColor: AppColors.primaryColor,
+
             actions: [
               IconButton(
                 onPressed: () {

@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/presentation/views/home/widget/speech_recognition_dialog_box.dart';
-import 'package:converter_hub/services/permission_handler_service.dart';
-import '../../../provider/speech_to_text_provider.dart';
+import 'package:converter_hub/data/services/permission_handler_service.dart';
+import '../../../../provider/speech_to_text_provider.dart';
 
 
 class SpeechToTextView extends StatefulWidget {
@@ -26,9 +26,12 @@ class _SpeechToTextViewState extends State<SpeechToTextView> {
       appBar: CustomAppBar(
         isBackBtnVisible: true,
         title: AppString.speechToText,
+        titleStyle: AppTextStyles.nunito18W700H1_4.copyWith(
+          color: AppColors.whiteColor,
+        ),
         isTitleCentered: true,
+        appBarColor: AppColors.primaryColor,
       ),
-
       body: Container(
         width: double.infinity,
         color: AppColors.backgroundColor,
@@ -118,7 +121,7 @@ class _SpeechToTextViewState extends State<SpeechToTextView> {
         elevation: 4,
         child: InkWell(
           onTap: () async {
-            final isValid = await PermissionHandlerService.micPermissionHandler();
+            final isValid = await PermissionHandlerService.checkMicPermission();
             if (isValid) {
               await showDialog(
                 context: context,

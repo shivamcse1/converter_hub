@@ -5,8 +5,8 @@ import 'package:converter_hub/config/app_config.dart';
 import 'package:converter_hub/core/app_imports.dart';
 import 'package:converter_hub/core/helper/image_picker_helper.dart';
 import 'package:converter_hub/data/models/pdf_model.dart';
-import 'package:converter_hub/services/pdf_services.dart';
-import 'package:converter_hub/services/permission_handler_service.dart';
+import 'package:converter_hub/data/services/pdf_services.dart';
+import 'package:converter_hub/data/services/permission_handler_service.dart';
 import 'package:path/path.dart' as p;
 import '../data/models/pdf_image_model.dart';
 
@@ -150,7 +150,7 @@ class ImageToPdfProvider extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      if (!await PermissionHandlerService.storagePermissionHandler()) return;
+      if (!await PermissionHandlerService.checkStoragePermission()) return;
       final allPdf = await pdfServices.getPdfFilesFromDirectory(
         folderPath: AppConfig.internalStoragePath,
       );

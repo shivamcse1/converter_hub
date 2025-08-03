@@ -107,6 +107,12 @@ class HomeViewState extends State<HomeView> {
 
                   Expanded(
                     child: CustomHomeItem(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.textSummarizeView,
+                        );
+                      },
                       radius: 15,
                       image: ImageConstant.textSummarizeImg,
                       text: "Text \nSummarize",
@@ -117,6 +123,12 @@ class HomeViewState extends State<HomeView> {
 
                   Expanded(
                     child: CustomHomeItem(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.createQrCodeView,
+                        );
+                      },
                       radius: 15,
                       image: ImageConstant.qrCodeImg,
                       text: "QR Code \nGenerator",
@@ -137,16 +149,6 @@ class HomeViewState extends State<HomeView> {
                       backgrounndColor: AppColors.whiteColor,
                       image: ImageConstant.qrCodeScannerImg,
                       text: "QR Code\n Scanner",
-                      textStyle: AppTextStyles.nunito15W600H1_4,
-                    ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: CustomHomeItem(
-                      radius: 15,
-                      backgrounndColor: AppColors.whiteColor,
-                      image: ImageConstant.pdfImg,
-                      text: "PDF \n To Text",
                       textStyle: AppTextStyles.nunito15W600H1_4,
                     ),
                   ),

@@ -3,7 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PermissionHandlerService {
   /// It used for mic permission
-  static Future<bool> micPermissionHandler() async {
+  static Future<bool> checkMicPermission() async {
     final PermissionStatus micStatus = await Permission.microphone.status;
     if (micStatus.isGranted == true) return true;
     bool status = await statusHandler(
@@ -13,7 +13,7 @@ class PermissionHandlerService {
     return status;
   }
 
-  static Future<bool> storagePermissionHandler() async {
+  static Future<bool> checkStoragePermission() async {
     final PermissionStatus storageStatus = await Permission.storage.status;
     if (storageStatus.isGranted) {
       debugPrint("Storage access allowed");

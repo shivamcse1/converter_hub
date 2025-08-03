@@ -1,5 +1,5 @@
 import 'package:converter_hub/core/app_imports.dart';
-import 'package:converter_hub/services/text_to_speech_services.dart';
+import 'package:converter_hub/data/services/text_to_speech_services.dart';
 
 import '../core/constant/app_key.dart';
 import '../core/constant/language_constant.dart';
